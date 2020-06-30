@@ -1,0 +1,14 @@
+#!/bin/bash
+(
+path="./"
+while [[ $path != / && ! (-f "Makefile") ]];
+do
+    cd $path
+    # Note: if you want to ignore symlinks, use "$(realpath -s "$path"/..)"
+    path="$(readlink -f "$path"/..)"
+done
+if [[ -f "Makefile" ]] ;
+then
+	make $@
+fi
+)
