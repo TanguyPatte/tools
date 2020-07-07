@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+files = Dir.glob("./**/variables.tf")
+
+files.each do |file|
+  puts "FILE: #{file}"
+  content = File.read(file)
+  parsed_content = content.scan(/^(variable[^{}]*{({[^}]*}|[^{}]*)*^})/m)
+  File.open(file,'w') do |f|
+    variables_blocks = parsed_content.flatten.select{|e| ! e.empty?}.sort
+    variables_blocks.each_with_index do |element,index|
+      f.puts element
+      f.puts unless index == variables_blocks.size - 1
+    end
+  end
+end
