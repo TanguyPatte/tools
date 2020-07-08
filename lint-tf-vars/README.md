@@ -12,3 +12,9 @@ FILE: ./variables.tf
 ## Installation
 
 Copy lint-tf-vars script in your path
+
+
+## Todo
+
+* add tests
+* display an error message if syntax seems wrong
